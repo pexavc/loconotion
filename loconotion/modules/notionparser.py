@@ -467,6 +467,9 @@ class Parser:
                 style["background"] = spritesheet.replace(
                     spritesheet_url, str(cached_spritesheet_url)
                 )
+
+                style["opacity"] = 1.0
+
                 img["style"] = style.cssText
 
     def process_stylesheets(self, soup):
