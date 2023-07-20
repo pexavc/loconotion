@@ -455,23 +455,23 @@ class Parser:
 
             # on emoji images, cache their sprite sheet and re-set their background url
             if img.has_attr("class") and "notion-emoji" in img["class"]:
-                style = cssutils.parseStyle(img["style"])
-                spritesheet = style["background"]
-                spritesheet_url = spritesheet[
-                    spritesheet.find("(") + 1 : spritesheet.find(")")
-                ]
-                cached_spritesheet_url = self.cache_file(
-                    f"https://www.notion.so{spritesheet_url}"
-                )
+                if img.has_attr("style"):
+                    style = cssutils.parseStyle(img["style"])
+                    spritesheet = style["background"]
+                    spritesheet_url = spritesheet[
+                        spritesheet.find("(") + 1 : spritesheet.find(")")
+                    ]
+                    cached_spritesheet_url = self.cache_file(
+                        f"https://www.notion.so{spritesheet_url}"
+                    )
 
-                style["background"] = spritesheet.replace(
-                    spritesheet_url, str(cached_spritesheet_url)
-                )
+                    style["background"] = spritesheet.replace(
+                        spritesheet_url, str(cached_spritesheet_url)
+                    )
 
-                if ("opacity" in style):
                     style["opacity"] = 1.0
 
-                img["style"] = style.cssText
+                    img["style"] = style.cssText
 
     def process_stylesheets(self, soup):
         # process stylesheets
