@@ -468,9 +468,8 @@ class Parser:
                     spritesheet_url, str(cached_spritesheet_url)
                 )
 
-                if ("opacity" in style) {
+                if ("opacity" in style):
                     style["opacity"] = 1.0
-                }
 
                 img["style"] = style.cssText
 
